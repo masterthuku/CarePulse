@@ -11,18 +11,9 @@ import { useState } from "react";
 import { UserFormValidation } from "@/lib/validation";
 import { useRouter } from "next/navigation";
 import { createUser } from "@/lib/actions/patient.actions";
+import { FormFieldType } from "./PatientForm";
 
-export enum FormFieldType {
-  INPUT = "input",
-  TEXTAREA = "textarea",
-  PHONE_INPUT = "phone-input",
-  DATE_PICKER = "date-picker",
-  CHECKBOX = "checkbox",
-  SELECT = "select",
-  SKELETON = "skeleton",
-}
-
-const PatientForm = () => {
+const RegisterForm = ({user} : {user: User}) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   // 1. Define your form.
@@ -60,8 +51,8 @@ const PatientForm = () => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex-1">
         <section className="mb-12 space-y-4">
-          <h1 className="header">Hello there 👋</h1>
-          <p className="text-dark-700">Schedule your first appointment.</p>
+          <h1 className="header">Welcome 👋</h1>
+          <p className="text-dark-700">Tell us more about yourself.</p>
         </section>
         <CustomFormField
           control={form.control}
@@ -72,26 +63,11 @@ const PatientForm = () => {
           iconSrc="/assets/icons/user.svg"
           iconAlt="user"
         />
-        <CustomFormField
-          control={form.control}
-          fieldType={FormFieldType.INPUT}
-          name="email"
-          label="Email"
-          placeholder="Type your email"
-          iconSrc="/assets/icons/email.svg"
-          iconAlt="email"
-        />
-        <CustomFormField
-          control={form.control}
-          fieldType={FormFieldType.PHONE_INPUT}
-          name="phone"
-          label="Phone Number"
-          placeholder="Type your phone number"
-        />
-        <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
+        
+        <SubmitButton isLoading={isLoading}>Submit and continue</SubmitButton>
       </form>
     </Form>
   );
 };
 
-export default PatientForm;
+export default RegisterForm;
